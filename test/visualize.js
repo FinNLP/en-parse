@@ -8,6 +8,7 @@ module.exports = function(tokens,index,deep){
 	console.log(chalk.black.bgWhite(" @ Sentence:",index));
 	console.log(chalk.green(" | "),chalk.bgRed("LENGTH",parsed.length));
 	console.log(chalk.green(" | "),chalk.green(tokens.join(" ")));
+	console.log(chalk.green(" | "),chalk.green(tokens.map((x,i)=>x+"/"+i).join(" ")));
 	console.log(chalk.green(" | "),chalk.green(tags.join(" ")));
 	if(!deep) recursiveConsole(parsed[0],2);
 	else parsed.forEach((x)=>recursiveConsole(x,2));
