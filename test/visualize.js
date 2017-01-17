@@ -5,27 +5,29 @@ const chalk = require("chalk");
 module.exports = function(tokens,index,deep){
 	var tags = pos(tokens).tags;
 	var parsed = parser(tags);
-	console.log(chalk.black.bgWhite(" @ Sentence:",index));
-	console.log(chalk.green(" | "),chalk.bgRed("LENGTH",parsed.length));
-	console.log(chalk.green(" | "),chalk.green(tokens.join(" ")));
-	console.log(chalk.green(" | "),chalk.green(tokens.map((x,i)=>x+"/"+i).join(" ")));
-	console.log(chalk.green(" | "),chalk.green(tags.join(" ")));
-	if(!deep) recursiveConsole(parsed[0],2);
-	else parsed.forEach((x)=>recursiveConsole(x,2));
+	console.log(chalk.bgGreen(" @ Sentence:",index));
+	console.log(chalk.bgRed("LENGTH",parsed.length));
+	console.log(chalk.green(tokens.join(" ")));
+	console.log(chalk.green(tokens.map((x,i)=>x+"/"+i).join(" ")));
+	console.log(chalk.green(tags.join(" ")));
+	if(!deep) recursiveConsole(parsed[0],0,tokens);
+	else parsed.forEach((x)=>recursiveConsole(x,0,tokens));
 };
 
-function recursiveConsole(node,i) {
-	var pads = chalk.green(" | ".repeat(i));
-	var type = chalk.yellow("Type: ") + node.type;
-	var tags = chalk.yellow("Tags: ") + node.tags;
-	var index = chalk.yellow("Indices: ") + node.index;
-	var label = chalk.yellow("Label: ") + node.label;
-	console.log(pads,type);
-	console.log(pads,tags);
-	console.log(pads,index);
-	console.log(pads,label);
-	console.log(pads,chalk.bgMagenta("# LEFT NODES"));
-	node.left.forEach((node)=>recursiveConsole(node,i+1));
-	console.log(pads,chalk.bgMagenta("# RIGHT NODES"));
-	node.right.forEach((node)=>recursiveConsole(node,i+1));
+function recursiveConsole(node,i,tokens) {
+	var pads = chalk.green("	 | ".repeat(i));
+	var type = chalk.blue("Tag/Type: ") + node.tags + "/" + node.type;
+	var vtokens = chalk.red("@ Node: ",getTokens(node.index,tokens));
+	var label = chalk.blue("Label: ") + node.label;
+	console.log(pads,vtokens);
+	console.log(pads,"	",type);
+	console.log(pads,"	",label);
+	if(node.left.length) console.log(pads,"	",chalk.green("# LEFT NODES"));
+	node.left.forEach((node)=>recursiveConsole(node,i+1,tokens));
+	if(node.right.length) console.log(pads,"	",chalk.green("# RIGHT NODES"));
+	if(node.right.length) node.right.forEach((node)=>recursiveConsole(node,i+1,tokens));
+}
+
+function getTokens(indices,tokens){
+	return tokens.filter((x,i)=>i>=indices[0]&&i<=indices[1]).join(" ");
 }
