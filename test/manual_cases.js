@@ -56,11 +56,9 @@ module.exports = [
 	["I","'ve","been","up","all","night"],
 	["Why","are","you","asking"],
 	["I","use","Sublime","Text","Editor","for","all","my","JavaScript","projects"],
-	["So","sweet","of","you","to","say","that","but","I","have","to","disagree"],
 	["I","feel","all","the","remorse","taking","over","my","brain","cells"],
 	["Have","a","seat"],
 	["How","many","of","you","are","there","?"],
 	["Send","me","a","message","when","Mary","comes","home"],
-	["Unless","i","'m","in","a","meeting","call","me","whenever","Chelsea","ranks","higher","than","the","day","before"],
-	["I","have","few","options","regarding","the","decline","of","OBD","sales","but","i","think","that","I","have","to","compete","anyway"],
+	["Unless","i","'m","in","a","meeting","call","me","whenever","Chelsea","does","higher","than","the","day","before"],
 ];
