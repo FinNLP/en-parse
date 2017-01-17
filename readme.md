@@ -8,7 +8,7 @@ English language syntactic dependency parser.
 
 ## The Experiment
 
-Stanford's CoreNLP, spaCy, and TurboParser are all decent dependency parsers, they use statistical approaches that uses statistical models of machine learning techniques of training and development.
+Stanford's CoreNLP, spaCy, and TurboParser are all decent dependency parsers that uses statistical models of machine learning techniques of training and development.
 
 However, my experiment here is different.
 
