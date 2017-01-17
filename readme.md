@@ -45,7 +45,7 @@ This example is very basic, and there's a lot more to look into how this parser 
 
 ## Current status
 
-For now, the parser does a good job in dealing with small sentences like the ones features in [manual cases](https://github.com/alexcorvi/en-parser/blob/master/test/manual_cases.js), however, things get pretty messy when a sentence has multiple phrases or clauses like this one: `I have few things regarding the the other thing of the something but I think that I have to do something anyway`.
+For now, the parser does a good job in dealing with small sentences like the ones featured in [manual cases](https://github.com/alexcorvi/en-parser/blob/master/test/manual_cases.js), however, things get pretty messy when a sentence has multiple phrases or clauses like this one: `I have few things regarding the the other thing of the something but I think that I have to do something anyway`.
 
 ## Why bother?
 
