@@ -5,8 +5,9 @@ const chalk = require("chalk");
 module.exports = function(tokens,index,deep){
 	var tags = pos(tokens).tags;
 	var parsed = parser(tags);
-	console.log(chalk.bgGreen(" @ Sentence:",index));
-	console.log(chalk.bgRed("LENGTH",parsed.length));
+	console.log(JSON.stringify(parsed));
+	console.log(chalk.red(" @ Sentence:",index));
+	console.log(chalk.red("LENGTH",parsed.length));
 	console.log(chalk.green(tokens.join(" ")));
 	console.log(chalk.green(tokens.map((x,i)=>x+"/"+i).join(" ")));
 	console.log(chalk.green(tags.join(" ")));
