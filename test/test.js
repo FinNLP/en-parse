@@ -8,7 +8,7 @@ describe('One root for all sentences', function () {
 		it('',function () {
 			this.test.title = sample[0].join(" ");
 			var tags = pos(sample[0]).tags;
-			var parsed = parser(tags);
+			var parsed = parser(tags,sample[0]);
 			if(parsed.length>1) {
 				visualize(sample[0],index,true);
 				throw new Error("Sentence parsing gave two roots");
