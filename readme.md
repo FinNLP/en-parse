@@ -14,6 +14,8 @@ npm i --save en-parser
 
 ```javascript
 const parser = require("en-parser");
+var tokens = ["The", "problem", "is", "that", "this", "has", "never", "been", "tried", "."];
+var tags = ["DT","NN","VBZ","IN","DT","VBZ","RB","VBN","VBD","PUNCT"];
 let parsed = parser(["PRP","VBP","TO","VBP"],["i","like","to","parse"]);
 ```
 
@@ -22,10 +24,75 @@ let parsed = parser(["PRP","VBP","TO","VBP"],["i","like","to","parse"]);
 >
 
 
-## TODO
+The `parsed` variable is now an array like this one:
 
-- Implement [English_LinES](https://github.com/UniversalDependencies/UD_English-LinES/blob/master/en_lines-ud-test.conllu) test
-- Write better documentation
+```javascript
+[
+  {
+    "label": "MWE",
+    "type": "NP",
+    "master": 1
+  },
+  {
+    "label": "NSUBJ",
+    "type": "NP",
+    "master": 2
+  },
+  {
+    "label": "ROOT",
+    "type": "VP",
+    "master": -1
+  },
+  {
+    "label": "COMPMARK",
+    "type": "PP",
+    "master": 5
+  },
+  {
+    "label": "NSUBJ",
+    "type": "NP",
+    "master": 5
+  },
+  {
+    "label": "XCOMP",
+    "type": "VP",
+    "master": 2
+  },
+  {
+    "label": "ADVMOD",
+    "type": "ADV",
+    "master": 8
+  },
+  {
+    "label": "AUX",
+    "type": "VBN",
+    "master": 8
+  },
+  {
+    "label": "ADVCL",
+    "type": "VP",
+    "master": 5
+  },
+  {
+    "label": "PUNCT",
+    "type": "PUNCT",
+    "master": 2
+  }
+]
+```
+
+## Annotation Specs:
+
+### Core Nominal arguments
+
+ANNOTATION | Name | Example
+--- | --- | ---
+**NSUBJ** | Nominal Subject | `I` like you
+**DOBJ** | Direct Object | I like `you`
+**IOBJ** | Indirect Object | she gave me `a book`
+**NSUBJPASS** | Nominal Subject (passive) | `I` have been given a chance
+**ATTR** | Attribute | This is `awesome`
+
 
 
 
