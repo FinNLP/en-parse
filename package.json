@@ -1,0 +1,39 @@
+{
+  "name": "en-parse",
+  "version": "1.0.0",
+  "description": "English language syntactic dependency parser",
+  "main": "lib/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "en-inflectors": "^1.0.1"
+  },
+  "devDependencies": {
+    "chalk": "^1.1.3",
+    "en-pos": "^1.0.0",
+    "json-loader": "^0.5.4",
+    "lodash.isequal": "^4.5.0"
+  },
+  "scripts": {
+    "test": "mocha test/test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexcorvi/en-parser.git"
+  },
+  "keywords": [
+    "english",
+    "depndency",
+    "parser",
+    "syntactic",
+    "language",
+    "natural"
+  ],
+  "author": "Alex Corvi <alex@arrayy.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alexcorvi/en-parser/issues"
+  },
+  "homepage": "https://github.com/alexcorvi/en-parser#readme"
+}
