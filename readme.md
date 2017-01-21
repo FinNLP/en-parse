@@ -83,18 +83,37 @@ The `parsed` variable is now an array like this one:
 
 ## Annotation Specs:
 
-### Core Nominal arguments
+### Core Nominal Arguments
 
-ANNOTATION | Name | Example
+Annotation | Name | Example
 --- | --- | ---
 **`NSUBJ`** | Nominal Subject | `I` like you
 **`DOBJ`** | Direct Object | I like `you`
 **`IOBJ`** | Indirect Object | she gave me `a book`
 **`NSUBJPASS`** | Nominal Subject (passive) | `I` have been given a chance
 **`ATTR`** | Attribute | This is `awesome`
-
-
-
+**`CCOMP`** | Clausal Complement | The boss ordered to `dig` the hole
+**`XCOMP`** | Open Clausal Complement | The boss told us to `dig`
+**`OBL`** | Oblique Object | Give the toys to `the children`
+**`EXPL`** | Expletive | I have been `there`
+**`ADVCL`** | Adverb Clause Modifier | We were walking as the rain was `falling`
+**`ADVMOD`** | Adverbial modifier | I don't eat `genetically` modified food.
+**`DISCOURSE`** | Discourse | I like that `:)`
+**`VPRT`** | Verbal Particle | I switched the TV `off`
+**`AUX`** | Auxiliary | I am `going` to buy a new computer
+**`AUXPASS`** | Auxiliary (passive) | I `have` been marked
+**`COMPMARK`** | Complement Marker | I will do it `if` I like it
+**`ADVMARK`** | Adverb Marker | I did it `after` I was convinced
+**`NOMD`** | Nominal Modifier | `MSNBC` news had little effect on the market
+**`NUMMOD`** | Numeric Modifier | I ate `2` eggs this morning
+**`ACL`** | Clausal Modifier of a Noun | I saw the man you `love`
+**`AMOD`** | Adjectival Modifier | you were `good` to him
+**`DET`** | Determiner | `which` book you prefer?
+**`CASE`** | Case Marking | I went `to` Rachel
+**`PUNCT`** | Punctuation | Guys`,` keep calm`!`
+**`CC`** | Coordinating Conjunction | Mathew `and` Alex
+**`INTERJ`** | Interjection | Pass me the sugar, `please`
+**`DEP`** | Unrecognized dependency | how `what`
 
 ## Why?
 
