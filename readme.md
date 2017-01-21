@@ -87,11 +87,11 @@ The `parsed` variable is now an array like this one:
 
 ANNOTATION | Name | Example
 --- | --- | ---
-**NSUBJ** | Nominal Subject | `I` like you
-**DOBJ** | Direct Object | I like `you`
-**IOBJ** | Indirect Object | she gave me `a book`
-**NSUBJPASS** | Nominal Subject (passive) | `I` have been given a chance
-**ATTR** | Attribute | This is `awesome`
+**`NSUBJ`** | Nominal Subject | `I` like you
+**`DOBJ`** | Direct Object | I like `you`
+**`IOBJ`** | Indirect Object | she gave me `a book`
+**`NSUBJPASS`** | Nominal Subject (passive) | `I` have been given a chance
+**`ATTR`** | Attribute | This is `awesome`
 
 
 
