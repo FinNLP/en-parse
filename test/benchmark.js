@@ -13,8 +13,8 @@ const results = {
 
 
 cases.forEach((sample)=>{
-	var tags = pos(sample[0]).tags;
-	var parsed = parser(tags,sample[0]);
+	var tags = pos(sample).tags;
+	var parsed = parser(tags,sample);
 	results.factory = results.factory + global.b[1] - global.b[0];
 	results.chunking = results.chunking + global.b[2] - global.b[1];
 	results.relating = results.relating + global.b[3] - global.b[2];
