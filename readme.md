@@ -36,4 +36,4 @@ let parsed = parser(["PRP","VBP","TO","VBP"],["i","like","to","parse"]);
 - Also because it's written in javascript it might be preferred in smart bots to reduce the complexity of having your bot written in node.js and the natural language processor written in Python or C++.
 
 ## Credits
-The algorithm of this parser was originally featured in Xav Ulflander's [Compendium](https://github.com/Ulflander/compendium-js) but that project seems to be dead. So I've re-written, optimized, and refractored his dependency parser and started where he left off. It now has over 250 rules and (almost) compliant with [universal dependencies V2](http://universaldependencies.org/)
+The idea of this parser was originally featured as a small experiment in Xav Ulflander's [Compendium](https://github.com/Ulflander/compendium-js/blob/master/src/dependency-en.js).
