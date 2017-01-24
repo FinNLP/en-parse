@@ -1,6 +1,6 @@
 {
   "name": "en-parse",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "English language syntactic dependency parser",
   "main": "lib/index.js",
   "directories": {
@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alexcorvi/en-parser.git"
+    "url": "git+https://github.com/finnlp/en-parse.git"
   },
   "keywords": [
     "english",
@@ -33,7 +33,7 @@
   "author": "Alex Corvi <alex@arrayy.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/alexcorvi/en-parser/issues"
+    "url": "https://github.com/finnlp/en-parse/issues"
   },
-  "homepage": "https://github.com/alexcorvi/en-parser#readme"
+  "homepage": "https://github.com/finnlp/en-parse#readme"
 }
