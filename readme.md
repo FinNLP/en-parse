@@ -1,4 +1,4 @@
-# English Parser
+# English Parse
 English language syntactic dependency parser.
 
 > **important**
@@ -9,11 +9,11 @@ English language syntactic dependency parser.
 ## Installation and Usage
 
 ```
-npm i --save en-parser
+npm i --save en-parse
 ```
 
 ```javascript
-const parser = require("en-parser");
+const parser = require("en-parse");
 var tokens = ["The", "problem", "is", "that", "this", "has", "never", "been", "tried", "."];
 var tags = ["DT","NN","VBZ","IN","DT","VBZ","RB","VBN","VBD","PUNCT"];
 let parsed = parser(["PRP","VBP","TO","VBP"],["i","like","to","parse"]);
