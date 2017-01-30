@@ -9,7 +9,7 @@ describe('One root for all sentences', function () {
 		it('',function () {
 			this.test.title = sample.join(" ");
 			var tags = pos(sample).tags;
-			var parsed = parser(tags,sample);
+			var parsed = parser(tags,sample,true);
 			if(parsed.length>1) {
 				visualize(sample,index+2,true);
 				throw new Error("Sentence parsing gave two roots");
@@ -18,6 +18,7 @@ describe('One root for all sentences', function () {
 	});
 });
 
+return;
 const expected = require('./results.json');
 var isEqual = require('lodash.isequal');
 
