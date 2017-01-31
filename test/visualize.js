@@ -17,9 +17,9 @@ module.exports = function(tokens,index,deep){
 
 function recursiveConsole(node,i,tokens) {
 	var pads = chalk.green("	 | ".repeat(i));
-	var type = chalk.blue("Tag/Type: ") + node.tags + "/" + node.type;
+	var type = chalk.yellow("Tag/Type: ") + node.tags + "/" + node.type;
 	var vtokens = chalk.red("@ Node: ",getTokens(node.index,tokens));
-	var label = chalk.blue("Label: ") + node.label;
+	var label = chalk.yellow("Label: ") + node.label;
 	console.log(pads,vtokens);
 	console.log(pads,"	",type);
 	console.log(pads,"	",label);
