@@ -1,11 +1,12 @@
-const findby = require('../relate/findby.js');
+import {findby} from "../relating";
+import {NodeInterface} from "../index";
 
 /**
  * 
  * Recursive generic repairs
  * 
 **/
-module.exports.recursive = [
+export const recursive:Array<Function> = [
 
 	/**
 	 * 
@@ -14,9 +15,9 @@ module.exports.recursive = [
 	**/
 
 	// AUX should not have dependencies
-	(nodes)=>{
+	(nodes:Array<NodeInterface>)=>{
 		return nodes.map((node)=>{
-			var nonEmptyAUXi = node.left.findIndex(x=>x.label.startsWith("AUX")&&(x.left.length||x.right.length));
+			var nonEmptyAUXi = node.left.findIndex((x:NodeInterface)=>x.label.startsWith("AUX")&&(x.left.length||x.right.length));
 			if(!~nonEmptyAUXi) return node;
 			node.left[nonEmptyAUXi].left.forEach(x=>node.left.push(x));
 			node.left[nonEmptyAUXi].right.forEach(x=>node.left.push(x));
@@ -28,7 +29,7 @@ module.exports.recursive = [
 
 	// CCOMP to: XCOMP
 	// CCOMP to: ADVCL
-	(nodes)=>{
+	(nodes:Array<NodeInterface>)=>{
 		var CCOMPi = nodes.findIndex(x=>x.label==="CCOMP");
 		if(~CCOMPi) {
 			if(nodes[CCOMPi].left.find(x=>x.label==="ADVMARK"||x.label==="ADVMOD")) nodes[CCOMPi].label = "ADVCL";
@@ -47,7 +48,7 @@ module.exports.recursive = [
 
 	// OBJ to: NSUBJ
 	// ATTR to: NSUBJ
-	(nodes)=>{
+	(nodes:Array<NodeInterface>)=>{
 		var hasEXPLi = nodes.findIndex(x=>x.left.find(x=>x.label==="EXPL"));
 		if(~hasEXPLi) {
 			var ATTRorOBJi = nodes[hasEXPLi].right.findIndex(x=>x.label.endsWith("OBJ")||x.label === "ATTR");
@@ -58,7 +59,7 @@ module.exports.recursive = [
 
 	// DOBJ to: IOBJ
 	// DOBJ to: OBL
-	(nodes)=>{
+	(nodes:Array<NodeInterface>)=>{
 		if(nodes.length) {
 			var verbPhrasei =  nodes.findIndex(x=>x.type==="VP"||x.type==="VB");
 			if(~verbPhrasei) {
@@ -85,7 +86,7 @@ module.exports.recursive = [
 	},
 
 	// X to: NMOD
-	(nodes)=>{
+	(nodes:Array<NodeInterface>)=>{
 		return nodes.reduce((n,x)=>{
 			var CASE = x.left.find(x=>x.label==="CASE");
 			if(!CASE || CASE.tokens[0] !== "of") n.push(x);
@@ -100,7 +101,7 @@ module.exports.recursive = [
 	},
 
 	// DOBJ to: NSUBJ
-	(nodes)=>{
+	(nodes:Array<NodeInterface>)=>{
 		/**
 		 * If verb phrase is the root, no subject,
 		 * and one right NP,
@@ -112,7 +113,7 @@ module.exports.recursive = [
 		return nodes;
 	},
 
-	(nodes)=>{
+	(nodes:Array<NodeInterface>)=>{
 		return nodes.map((node)=>{
 			node.left.sort((a,b)=>a.index[0]-b.index[0]);
 			node.right.sort((a,b)=>a.index[0]-b.index[0]);
@@ -127,7 +128,7 @@ module.exports.recursive = [
  * Unknown dependencies repairs
  * 
 **/
-module.exports.dep = [
+export const dep:Array<Function> = [
 	// PUNCs
 	function(nodes){
 		var l = nodes.length;
@@ -167,7 +168,7 @@ module.exports.dep = [
 	// a clausal complement
 	function(nodes){
 		if(nodes.length === 1) return nodes;
-		else if(nodes.filter(x=>x.type.startsWith("V")).length !== nodes.length) return nodes;
+		else if(nodes.filter(x=>x.type && x.type.startsWith("V")).length !== nodes.length) return nodes;
 		else if(nodes.findIndex(x=>x.label==="ROOT") === 0) return nodes;
 		else return nodes.reduce((newArr,node,index)=>{
 			if(index === 0) {
