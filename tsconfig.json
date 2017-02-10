@@ -12,7 +12,7 @@
         "forceConsistentCasingInFileNames":true
     },
     "files": [
-        "./src/index.ts"
+        "./lib/index.ts"
     ],
     "exclude": [
         "./node_modules/*"
