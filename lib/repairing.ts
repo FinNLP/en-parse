@@ -1,17 +1,16 @@
-const repairs = require('../rules/repairs.js');
+import {NodeInterface} from "./index";
+import * as repairs from "./rules/repairs";
 
 /**
  * 
  * This is the final step in the dependency parsing.
  * it will try to apply the repair functions
- * defined in the ../rules/repairs.js
+ * defined in the ../rules/repairs.ts
  * recursively.
  * 
- * @param  {Array} 	nodes 	Nodes array
- * @return {Array}       	Repaired nodes array
- * 
 **/
-module.exports = function (nodes) {
+
+export default function (nodes:Array<NodeInterface>):Array<NodeInterface>{
 	
 	repairs.recursive.forEach((repair)=>{
 		nodes = applyRecursive(nodes,repair);
@@ -24,8 +23,8 @@ module.exports = function (nodes) {
 	return nodes;
 };
 
-function applyRecursive(nodes,repair) {
-	return repair(nodes).map((node)=>{
+function applyRecursive(nodes:Array<NodeInterface>,repair:Function):Array<NodeInterface>{
+	return repair(nodes).map((node:NodeInterface)=>{
 		node.left = applyRecursive(node.left,repair);
 		node.right = applyRecursive(node.right,repair);
 		return node;
