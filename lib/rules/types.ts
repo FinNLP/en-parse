@@ -60,7 +60,6 @@ export const unique:Array<UniqueInterface> = [
 	["VP",				'VBD'],
 	["VP",				'VBG'],
 	["ADV",				'WRB'],
-	// ["ADJ",				'WP$'], CASES: go to the man whose hat is red, whose book is this
 	["ADV",				'RB'],
 	["ADV",				'RBR'],
 	["ADV",				'RBS'],
