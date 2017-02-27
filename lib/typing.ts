@@ -6,7 +6,7 @@ export default function(nodes:Array<NodeInterface>):Array<NodeInterface>{
 		nodes = typer(typeRule[0], typeRule[1], typeRule[2], nodes);
 	});
 	types.unique.forEach((typeRule)=>{
-		nodes = typer(typeRule[0], typeRule[1], typeRule[2], nodes);
+		nodes = typer(typeRule[0], typeRule[1], undefined, nodes);
 	});
 	types.postUnique.forEach((typeRule)=>{
 		nodes = typer(typeRule[0], typeRule[1], typeRule[2], nodes);

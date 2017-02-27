@@ -17,7 +17,7 @@ export const recursive:Array<Function> = [
 	// AUX should not have dependencies
 	(nodes:Array<NodeInterface>)=>{
 		return nodes.map((node)=>{
-			var nonEmptyAUXi = node.left.findIndex((x:NodeInterface)=>x.label.startsWith("AUX")&&(x.left.length||x.right.length));
+			var nonEmptyAUXi = node.left.findIndex((x:NodeInterface)=>x.label.startsWith("AUX")&&(!!x.left.length||!!x.right.length));
 			if(!~nonEmptyAUXi) return node;
 			node.left[nonEmptyAUXi].left.forEach(x=>node.left.push(x));
 			node.left[nonEmptyAUXi].right.forEach(x=>node.left.push(x));
@@ -49,7 +49,7 @@ export const recursive:Array<Function> = [
 	// OBJ to: NSUBJ
 	// ATTR to: NSUBJ
 	(nodes:Array<NodeInterface>)=>{
-		var hasEXPLi = nodes.findIndex(x=>x.left.find(x=>x.label==="EXPL"));
+		var hasEXPLi = nodes.findIndex(x=>!!~x.left.findIndex(x=>x.label==="EXPL"));
 		if(~hasEXPLi) {
 			var ATTRorOBJi = nodes[hasEXPLi].right.findIndex(x=>x.label.endsWith("OBJ")||x.label === "ATTR");
 			if(~ATTRorOBJi) nodes[hasEXPLi].right[ATTRorOBJi].label = "NSUBJ";
@@ -87,7 +87,7 @@ export const recursive:Array<Function> = [
 
 	// X to: NMOD
 	(nodes:Array<NodeInterface>)=>{
-		return nodes.reduce((n,x)=>{
+		return nodes.reduce((n:Array<NodeInterface>,x)=>{
 			var CASE = x.left.find(x=>x.label==="CASE");
 			if(!CASE || CASE.tokens[0] !== "of") n.push(x);
 			else {
@@ -113,6 +113,7 @@ export const recursive:Array<Function> = [
 		return nodes;
 	},
 
+	// sort by indices
 	(nodes:Array<NodeInterface>)=>{
 		return nodes.map((node)=>{
 			node.left.sort((a,b)=>a.index[0]-b.index[0]);
@@ -130,7 +131,7 @@ export const recursive:Array<Function> = [
 **/
 export const dep:Array<Function> = [
 	// PUNCs
-	function(nodes){
+	function(nodes:Array<NodeInterface>){
 		var l = nodes.length;
 		if (l === 2 && nodes[1].type === 'PUNCT') {
 			nodes[1].label = 'PUNCT';
@@ -141,7 +142,7 @@ export const dep:Array<Function> = [
 	},
 
 	// Last shot at root identification
-	function(nodes){
+	function(nodes:Array<NodeInterface>){
 		if(nodes.find(x=>x.label==="ROOT")) return nodes;
 		else if(nodes.length === 1) {
 			nodes[0].label = "ROOT";
@@ -166,11 +167,11 @@ export const dep:Array<Function> = [
 
 	// Mistakingly labeled root making right verbs unable to take it
 	// a clausal complement
-	function(nodes){
+	function(nodes:Array<NodeInterface>){
 		if(nodes.length === 1) return nodes;
 		else if(nodes.filter(x=>x.type && x.type.startsWith("V")).length !== nodes.length) return nodes;
 		else if(nodes.findIndex(x=>x.label==="ROOT") === 0) return nodes;
-		else return nodes.reduce((newArr,node,index)=>{
+		else return nodes.reduce((newArr:Array<NodeInterface>,node,index)=>{
 			if(index === 0) {
 				node.label = "ROOT";
 				newArr.push(node);
@@ -188,7 +189,7 @@ export const dep:Array<Function> = [
 	// COMMENT THIS ONE OUT AND DEBUG THE ORPHANS
 	// THEN WRITE REPAIRS ABOVE IT
 	// unknown dependency
-	function(nodes){
+	function(nodes:Array<NodeInterface>){
 		var rootIndex = nodes.findIndex(x=>x.label==="ROOT");
 		var rooti = nodes[rootIndex].index[0];
 		nodes.forEach((item,index)=>{
