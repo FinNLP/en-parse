@@ -1,4 +1,4 @@
-const cases = require('./cases.js');
+const cases = require('./cases.json');
 const parser = require("../lib/index.js");
 const pos = require("en-pos");
 const fs = require('fs');
