@@ -1,34 +1,14 @@
-import * as coordinating from "./coordinating";
-import relating from "./relating";
 import typing from "./typing";
+import relating from "./relating";
 import repairing from "./repairing";
 
-/**
- * 
- * Sentence stoppers:
- *
- * 1. ,
- * 2. and (token)
- * 3. :
- * 4. "
- * 5. ( )
- * 
-**/
-
-export const parse = function(tags:Array<string>,tokens:Array<string>) {
-
+export const parse = function(tags:Array<string>,tokens:Array<string>,o?:true) {
 	let nodes = tags.map((tag,i)=>nodeFactory(tag,tokens[i],i));
-	
-	let cnodes = coordinating.split(nodes);
-	cnodes.subSentences = cnodes.subSentences.map((subsentence)=>{
-		subsentence = typing(subsentence);
-		subsentence = relating(subsentence,10);					
-		subsentence = repairing(subsentence);
-		// TODO: MWE
-		return subsentence;
-	});
-
-	return coordinating.join(cnodes);
+	nodes = typing(nodes);
+	nodes = relating(nodes,10);
+	nodes = repairing(nodes);
+	if(o) return nodes;
+	return toArray(nodes[0]);
 };
 
 export interface NodeInterface {
@@ -38,7 +18,7 @@ export interface NodeInterface {
 	tags:Array<string>,
 	index:Array<number>,
 	type:string,
-	label:string
+	label:string,
 }
 
 function nodeFactory(tag:string,token:string,index:number):NodeInterface {
@@ -52,3 +32,34 @@ function nodeFactory(tag:string,token:string,index:number):NodeInterface {
 		label:""
 	};
 }
+
+export interface ResultNode {
+
+}
+
+function toArray(jsonTree:NodeInterface,parent?:number,arr?:ResultNode[]){
+	if(!arr) arr = [];
+	if(parent === undefined) parent = -1;
+	var length = jsonTree.index[1] - jsonTree.index[0] + 1;
+	while(length){
+		var pos = jsonTree.index[0] + length - 1;
+		var thisLabel = jsonTree.label;
+		var thisParent = parent;
+		if(pos !== jsonTree.index[1]) {
+			thisLabel = "MWE";
+			thisParent = jsonTree.index[1];
+		}
+		arr[pos] = {
+			label:thisLabel,
+			type:jsonTree.type,
+			parent:thisParent,
+		};
+		length--;
+	}
+	jsonTree.left.forEach((x)=>arr = toArray(x,jsonTree.index[1],arr));
+	jsonTree.right.forEach((x)=>arr = toArray(x,jsonTree.index[1],arr));
+	return arr;
+}
+
+
+export default parse;
