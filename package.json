@@ -1,6 +1,6 @@
 {
   "name": "en-parse",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "English language syntactic dependency parser",
   "main": "lib/index.js",
   "dependencies": {
