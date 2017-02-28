@@ -1,6 +1,6 @@
-import typing from "./typing";
 import relating from "./relating";
 import repairing from "./repairing";
+import typing from "./typing";
 
 export const parse = function(tags:Array<string>,tokens:Array<string>,o?:true) {
 	let nodes = tags.map((tag,i)=>nodeFactory(tag,tokens[i],i));
@@ -34,7 +34,9 @@ function nodeFactory(tag:string,token:string,index:number):NodeInterface {
 }
 
 export interface ResultNode {
-
+	label:string,
+	type:string,
+	parent:number
 }
 
 function toArray(jsonTree:NodeInterface,parent?:number,arr?:ResultNode[]){
