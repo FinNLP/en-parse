@@ -4,7 +4,7 @@
   "description": "English language syntactic dependency parser",
   "main": "lib/index.js",
   "dependencies": {
-    "en-inflectors": "^1.0.7"
+    "en-inflectors": "^1.0.8"
   },
   "devDependencies": {
     "chalk": "^1.1.3",
