@@ -2,7 +2,8 @@
   "name": "en-parse",
   "version": "1.0.6",
   "description": "English language syntactic dependency parser",
-  "main": "lib/index.js",
+  "main": "./dist/index.js",
+  "types":"./dist/index.d.ts",
   "dependencies": {
     "en-inflectors": "^1.0.8"
   },
