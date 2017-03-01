@@ -2,14 +2,17 @@ import relating from "./relating";
 import repairing from "./repairing";
 import typing from "./typing";
 
-export const parse = function(tags:Array<string>,tokens:Array<string>,o?:true):ResultNode[] {
+export const tree = function(tags:Array<string>,tokens:Array<string>):NodeInterface[]{
 	let nodes = tags.map((tag,i)=>nodeFactory(tag,tokens[i],i));
 	nodes = typing(nodes);
 	nodes = relating(nodes,10);
 	nodes = repairing(nodes);
-	if(o) return nodes;
-	return toArray(nodes[0]);
+	return nodes;
 };
+
+export const parse = function(tags:Array<string>,tokens:Array<string>):ResultNode[]{
+	return toArray(tree(tags,tokens)[0]);
+}
 
 export interface NodeInterface {
 	left:Array<NodeInterface>,
