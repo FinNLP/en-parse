@@ -2,7 +2,7 @@ import relating from "./relating";
 import repairing from "./repairing";
 import typing from "./typing";
 
-export const parse = function(tags:Array<string>,tokens:Array<string>,o?:true) {
+export const parse = function(tags:Array<string>,tokens:Array<string>,o?:true):ResultNode[] {
 	let nodes = tags.map((tag,i)=>nodeFactory(tag,tokens[i],i));
 	nodes = typing(nodes);
 	nodes = relating(nodes,10);
@@ -39,7 +39,7 @@ export interface ResultNode {
 	parent:number
 }
 
-function toArray(jsonTree:NodeInterface,parent?:number,arr?:ResultNode[]){
+function toArray(jsonTree:NodeInterface,parent?:number,arr?:ResultNode[]):ResultNode[]{
 	if(!arr) arr = [];
 	if(parent === undefined) parent = -1;
 	var length = jsonTree.index[1] - jsonTree.index[0] + 1;
