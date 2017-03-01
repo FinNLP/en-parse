@@ -1,4 +1,4 @@
-const parser = require("../dist/index.js").default;
+const parser = require("../dist/index.js").tree;
 const pos = require("en-pos");
 const chalk = require("chalk");
 
@@ -7,7 +7,7 @@ const chalk = require("chalk");
 
 module.exports = function(tokens,index,deep){
 	var tags = new pos.Tag(tokens).initial().smooth().tags;
-	var parsed = parser(tags,tokens,true);
+	var parsed = parser(tags,tokens);
 	console.log(JSON.stringify(parsed));
 	console.log(chalk.red(" @ Sentence:",index));
 	console.log(chalk.red("LENGTH",parsed.length));
