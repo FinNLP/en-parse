@@ -12,16 +12,16 @@ export const tree = function(tags:Array<string>,tokens:Array<string>):NodeInterf
 
 export const parse = function(tags:Array<string>,tokens:Array<string>):ResultNode[]{
 	return toArray(tree(tags,tokens)[0]);
-}
+};
 
 export interface NodeInterface {
-	left:Array<NodeInterface>,
-	right:Array<NodeInterface>,
-	tokens:Array<string>,
-	tags:Array<string>,
-	index:Array<number>,
-	type:string,
-	label:string,
+	left:Array<NodeInterface>;
+	right:Array<NodeInterface>;
+	tokens:Array<string>;
+	tags:Array<string>;
+	index:Array<number>;
+	type:string;
+	label:string;
 }
 
 function nodeFactory(tag:string,token:string,index:number):NodeInterface {
@@ -37,12 +37,12 @@ function nodeFactory(tag:string,token:string,index:number):NodeInterface {
 }
 
 export interface ResultNode {
-	label:string,
-	type:string,
-	parent:number
+	label:string;
+	type:string;
+	parent:number;
 }
 
-function toArray(jsonTree:NodeInterface,parent?:number,arr?:ResultNode[]):ResultNode[]{
+export function toArray(jsonTree:NodeInterface,parent?:number,arr?:ResultNode[]):ResultNode[]{
 	if(!arr) arr = [];
 	if(parent === undefined) parent = -1;
 	var length = jsonTree.index[1] - jsonTree.index[0] + 1;
