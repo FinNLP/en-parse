@@ -1,12 +1,11 @@
 export interface RelationshipInterface {
-	0:Array<string>,
-	1:Array<string>,
-	2:number,	
-	3:number,	
-	4:string,	
-	5:string	
-}
-
+	0:Array<string>;
+	1:Array<string>;
+	2:number;
+	3:number;
+	4:string;
+	5:string;
+};
 
 
 export const relationships:Array<RelationshipInterface> =  [

@@ -1,6 +1,5 @@
 import inflectors = require('en-inflectors');
 import {relationships} from "./rules/relationships";
-import {RelationshipInterface} from "./rules/relationships";
 import {NodeInterface} from "./index";
 
 /**
