@@ -1,4 +1,4 @@
-import {findby} from "../relating";
+import {findBy} from "../relating";
 import {NodeInterface} from "../index";
 
 /**
@@ -105,8 +105,8 @@ export const recursive:Array<Function> = [
 		 * and one right NP,
 		 * then this NP become NSUBJ rather than DOBJ
 		**/
-		if (nodes[0] && nodes[0].type === 'VP' && (!findby.label('NSUBJ', nodes[0].left)) && (!findby.label('NSUBJ', nodes[0].right))) {
-			if (findby.label('DOBJ', nodes[0].right)) nodes[0].label = 'NSUBJ';
+		if (nodes[0] && nodes[0].type === 'VP' && (!findBy.label('NSUBJ', nodes[0].left)) && (!findBy.label('NSUBJ', nodes[0].right))) {
+			if (findBy.label('DOBJ', nodes[0].right)) nodes[0].label = 'NSUBJ';
 		}
 		return nodes;
 	},
