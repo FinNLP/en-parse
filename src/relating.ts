@@ -63,7 +63,7 @@ function identifyRoot(nodes:Array<NodeInterface>){
 				if(nx1.type === "NP" && ~vbs.indexOf(nx2.type)) continue;
 				else if(nx3 && nx1.type === "NP" && nx2.tags[0] === "RB" && ~vbs.indexOf(nx3.type)) continue;
 			}
-			else if (nx2 && ~oe.indexOf(new Inflectors(nx1.tokens[0]).conjugate("VBP")) && ~vbs.indexOf(nx2.type)) continue;
+			else if (nx2 && ~oe.indexOf(new Inflectors(deContract(nx1.tokens[0])).conjugate("VBP")) && ~vbs.indexOf(nx2.type)) continue;
 		}
 		nodes[i].label = "ROOT";
 		break;
@@ -158,8 +158,8 @@ function matchNodes (left:NodeInterface, right:NodeInterface, iteration:number):
 		else if(rel.label === "NSUBJPASS" && rel.direction === "->" && findBy.label("NSUBJPASS",right.left)) continue;
 
 		// condition : tokens
-		else if(rel.leftTokens.length && rel.leftTokens.indexOf(new Inflectors(left.tokens[0]).conjugate("VBP")) === -1) continue;
-		else if(rel.rightTokens.length && rel.rightTokens.indexOf(new Inflectors(right.tokens[0]).conjugate("VBP")) === -1) continue;
+		else if(rel.leftTokens.length && rel.leftTokens.indexOf(new Inflectors(deContract(left.tokens[0])).conjugate("VBP")) === -1) continue;
+		else if(rel.rightTokens.length && rel.rightTokens.indexOf(new Inflectors(deContract(right.tokens[0])).conjugate("VBP")) === -1) continue;
 
 		else {
 			match = rel;
@@ -189,3 +189,12 @@ export const findBy = {
 		return !!nodes.find((node)=>node.label === label);
 	},
 };
+
+// reverse english contractions back to it's normal form
+const contractions = ["'m",	"'s",	"'d",	"'ll",	"'re",	"'ve"];
+const replacements = ["am",	"is",	"would","will",	"are",	"have"];
+function deContract(token:string):string{
+	let ci = contractions.indexOf(token);
+	if(~ci) return replacements[ci];
+	else return token;
+}
