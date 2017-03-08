@@ -87,7 +87,7 @@ export const recursive:Array<Function> = [
 	(nodes:Array<NodeInterface>)=>{
 		return nodes.reduce((n:Array<NodeInterface>,x)=>{
 			var CASE = x.left.find(x=>x.label==="CASE");
-			if(!CASE || CASE.tokens[0] !== "of") n.push(x);
+			if(!CASE || (CASE.tokens[0].toLowerCase() !== "of" && CASE.tokens[0].toLowerCase() !== "by")) n.push(x);
 			else {
 				x.label = "NMOD";
 				var newParent = n.findIndex(x=>x.label.endsWith("SUBJ")||x.label.endsWith("OBL")||x.label.endsWith("OBJ"));
