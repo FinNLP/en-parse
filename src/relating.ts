@@ -1,6 +1,6 @@
-import inflectors = require('en-inflectors');
 import {relationships} from "./rules/relationships";
 import {NodeInterface} from "./index";
+import {Inflectors} from "en-inflectors";
 
 /**
  * 
@@ -63,7 +63,7 @@ function identifyRoot(nodes:Array<NodeInterface>){
 				if(nx1.type === "NP" && ~vbs.indexOf(nx2.type)) continue;
 				else if(nx3 && nx1.type === "NP" && nx2.tags[0] === "RB" && ~vbs.indexOf(nx3.type)) continue;
 			}
-			else if (nx2 && ~oe.indexOf(new inflectors.Inflectors(nx1.tokens[0]).conjugate("VBP")) && ~vbs.indexOf(nx2.type)) continue;
+			else if (nx2 && ~oe.indexOf(new Inflectors(nx1.tokens[0]).conjugate("VBP")) && ~vbs.indexOf(nx2.type)) continue;
 		}
 		nodes[i].label = "ROOT";
 		break;
@@ -140,20 +140,27 @@ function matchNodes (left:NodeInterface, right:NodeInterface, iteration:number):
 	for (let i = 0; i < relationships.length; i++) {
 		let rel = relationships[i];
 		// condition : Type
-		if(rel[0][0] !== "" && rel[0][0] !== left.type) continue;
-		else if(rel[0][1] !== "" && rel[0][1] !== right.type) continue;
+		if(rel.left.length && rel.left.indexOf(left.type) === -1) continue; 
+		else if (rel.right.length && rel.right.indexOf(right.type) === -1) continue; 
+
 		// Condition : Delay
-		else if(rel[3] !== -1 && iteration <= rel[3]) continue;
+		else if(rel.delay !== -1 && iteration <= rel.delay) continue;
+
 		// Condition : maximum distance
-		else if(rel[2] !== -1 && ((right.index[0] - left.index[1])-1) > rel[2]) continue;
+		else if(rel.maxDistance !== -1 && ((right.index[0] - left.index[1])-1) > rel.maxDistance) continue;
+
 		// Condition : direction & root
-		else if(rel[4] === "<-" && right.label === "ROOT") continue;
-		else if(rel[4] === "->" && left.label === "ROOT") continue;
+		else if(rel.direction === "<-" && right.label === "ROOT") continue;
+		else if(rel.direction === "->" && left.label === "ROOT") continue;
+
 		// condition : no two subjects
-		else if(rel[5]==="NSUBJ" && rel[4]==="->" && findby.label('NSUBJ',right.left)) continue;
+		else if(rel.label === "NSUBJ" && rel.direction === "->" && findBy.label("NSUBJ",right.left)) continue;
+		else if(rel.label === "NSUBJPASS" && rel.direction === "->" && findBy.label("NSUBJPASS",right.left)) continue;
+
 		// condition : tokens
-		else if(rel[1][0]!=="" && !~left.tokens.map(x=>new inflectors.Inflectors(x).conjugate("VBP")).indexOf(rel[1][0])) continue;
-		else if(rel[1][1]!=="" && !~right.tokens.map(x=>new inflectors.Inflectors(x).conjugate("VBP")).indexOf(rel[1][1])) continue;
+		else if(rel.leftTokens.length && rel.leftTokens.indexOf(new Inflectors(left.tokens[0]).conjugate("VBP")) === -1) continue;
+		else if(rel.rightTokens.length && rel.rightTokens.indexOf(new Inflectors(right.tokens[0]).conjugate("VBP")) === -1) continue;
+
 		else {
 			match = rel;
 			break;
@@ -163,8 +170,8 @@ function matchNodes (left:NodeInterface, right:NodeInterface, iteration:number):
 	if(!match) return false;
 
 	return {
-		direction:match[4],
-		label:match[5]
+		direction:match.direction,
+		label:match.label
 	};
 };
 
@@ -174,7 +181,7 @@ function matchNodes (left:NodeInterface, right:NodeInterface, iteration:number):
  * to find specific nodes in an array
  * 
 **/
-export const findby = {
+export const findBy = {
 	type: function(type:string,nodes:Array<NodeInterface>):boolean {
 		return !!nodes.find((node)=>node.type === type);
 	},
