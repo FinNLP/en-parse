@@ -18,7 +18,6 @@ export const relationships:RelationshipInterface[] = [
 	 *  		2. DOBJ			Direct Object 			http://universaldependencies.org/u/dep/obj.html
 	 *  		3. IOBJ 		Indirect Object 		http://universaldependencies.org/u/dep/iobj.html
 	 *    		4. NSUBJPASS 	Nominal Subject (Passive)
-	 *    		5. ATTR
 	**/
 	{
 		left:["NP","WDT","WP"],

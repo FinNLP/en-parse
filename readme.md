@@ -91,7 +91,6 @@ Annotation | Name | Example
 **`DOBJ`** | Direct Object | I like `you`
 **`IOBJ`** | Indirect Object | she gave me `a book`
 **`NSUBJPASS`** | Nominal Subject (passive) | `I` have been given a chance
-**`ATTR`** | Attribute | This is `awesome`
 **`CCOMP`** | Clausal Complement | The boss ordered to `dig` the hole
 **`XCOMP`** | Open Clausal Complement | The boss told us to `dig`
 **`OBL`** | Oblique Object | Give the toys to `the children`

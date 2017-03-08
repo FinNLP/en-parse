@@ -38,8 +38,7 @@ export const recursive:Array<Function> = [
 				var mods = nodes[CCOMPi].right.filter(x=>x.label.endsWith("MOD"));
 				var subjs = nodes[CCOMPi].left.filter(x=>x.label.endsWith("SUBJ"));
 				var objs = nodes[CCOMPi].right.filter(x=>x.label.endsWith("OBJ"));
-				var attrs = nodes[CCOMPi].right.filter(x=>x.label.endsWith("ATTR"));
-				if(!(mods.length || subjs.length || objs.length || attrs.length)) nodes[CCOMPi].label = "XCOMP";
+				if(!(mods.length || subjs.length || objs.length)) nodes[CCOMPi].label = "XCOMP";
 				else if(nodes[CCOMPi].right[0].type === "WDT" || nodes[CCOMPi].right[0].type === "WP") nodes[CCOMPi].label = "XCOMP";
 			}
 		}
@@ -47,12 +46,11 @@ export const recursive:Array<Function> = [
 	},
 
 	// OBJ to: NSUBJ
-	// ATTR to: NSUBJ
 	(nodes:Array<NodeInterface>)=>{
 		var hasEXPLi = nodes.findIndex(x=>!!~x.left.findIndex(x=>x.label==="EXPL"));
 		if(~hasEXPLi) {
-			var ATTRorOBJi = nodes[hasEXPLi].right.findIndex(x=>x.label.endsWith("OBJ")||x.label === "ATTR");
-			if(~ATTRorOBJi) nodes[hasEXPLi].right[ATTRorOBJi].label = "NSUBJ";
+			var OBJi = nodes[hasEXPLi].right.findIndex(x=>x.label.endsWith("OBJ"));
+			if(~OBJi) nodes[hasEXPLi].right[OBJi].label = "NSUBJ";
 		}
 		return nodes;
 	},
