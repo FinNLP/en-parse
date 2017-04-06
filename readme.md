@@ -14,8 +14,6 @@ npm i --save en-parse
 
 ```javascript
 const parser = require("en-parse").default;
-var tokens = ["The", "problem", "is", "that", "this", "has", "never", "been", "tried", "."];
-var tags = ["DT","NN","VBZ","IN","DT","VBZ","RB","VBN","VBD","PUNCT"];
 let parsed = parser(["PRP","VBP","TO","VBP"],["i","like","to","parse"]);
 ```
 
