@@ -21,53 +21,102 @@ export default function(nodes:NodeInterface[],recursionLimit:number){
 	return nodes;
 };
 
+// I did the homework when I was told to
+
 /**
  * Root identifier:
- * This function tries to identify the root of the verb
- * base on the following constraints:
- * 
- * 		- Possible root types are: VB VP VBN
- * 		- The root is the 1st non auxiliary verb in a sentence
- * 		- The auxiliary verb is:
- * 			- A verb that is followed directly by a possible root type
- * 			- A verb that is followed directly by an RB then a possible root type
- * 			- A verb that is followed directly by an NP then an RB then a possible root type
- * 			- A verb that comes at index 0 of the nodes and
- * 				- followed directly by an NP then a possible root type
- * 				- followed directly by an NP then an RB then a possible root type
+
+
+
+	- Possible findings
+		
+		// 4 verbs
+		- BE + GOING + TO + (ROOT VERB)
+		- WILL + HAVE + been + (ROOT VERB)
+		
+		// 3 verbs
+		- HAVE + been + (ROOT VERB)
+		- WILL + HAVE + (ROOT VERB)
+		
+		// 2 indicator
+		- DO + (ROOT VERB)
+		- IS + (ROOT VERB)
+		- HAVE + (ROOT VERB)
+		- GOING (TO) + (ROOT VERB)
+
+		// 1 verbs
+		- (ROOT VERB)
+
  * 
 **/
-function identifyRoot(nodes:Array<NodeInterface>){
-	let vbs = ["VP","VB","VBN"]; // conjugated verbs
-	let pa = ["VBZ","VB","VBP","VBD","MD","VBN"]; // possible auxiliaries
-	let oe = ["be","have","do","will","shall","may","can"];
-	for (let i = 0; i < nodes.length; i++) {
-		let node = nodes[i];
-		let nx1:NodeInterface|undefined = nodes[i+1];
-		let nx2:NodeInterface|undefined = nodes[i+2];
-		let nx3:NodeInterface|undefined = nodes[i+3];
 
-		if(!~vbs.indexOf(node.type)) continue; // not a conjugated verb
-		// see if it's an auxiliary
-		if(~pa.indexOf(node.tags[0]) && nx1) {
-			// next tag is a conjugated verb? then it's an auxiliary
-			if(~vbs.indexOf(nx1.type)) continue;
-			// next tag is an RB and the next2 tag is a conjugated verb? then it's an auxiliary
-			else if(nx1.tags[0] === "RB" && nx2) {
-				if(~vbs.indexOf(nx2.type)) continue;
-				else if(nx3 && nx2.type === "NP" && ~vbs.indexOf(nx3.type)) continue;
-			}
-			// it's the first one, followed by NP then VB
-			// or it's the first one followed by NP RB VB
-			else if(nx2 && node.index[0] === 0) {
-				if(nx1.type === "NP" && ~vbs.indexOf(nx2.type)) continue;
-				else if(nx3 && nx1.type === "NP" && nx2.tags[0] === "RB" && ~vbs.indexOf(nx3.type)) continue;
-			}
-			else if (nx2 && ~oe.indexOf(new Inflectors(deContract(nx1.tokens[0])).conjugate("VBP")) && ~vbs.indexOf(nx2.type)) continue;
-		}
-		nodes[i].label = "ROOT";
-		break;
+
+function identifyRoot(nodes:Array<NodeInterface>){
+	let marked = false;
+	function markAsRoot(index:number){
+		marked = true;
+		nodes[index].label = "ROOT";
 	}
+
+	const removedADs:{index:number,node:NodeInterface}[] = [];
+	const roots:{index:number,base:string,token:string}[] = [];
+
+	for (var index = 0; index < nodes.length; index++) {
+		let node = nodes[index];
+		if(node.type === "AD") continue; // should not be a nominal phrase
+		removedADs.push({
+			index:index,
+			node:node
+		});
+	}
+
+	for (var index = 0; index < removedADs.length; index++) {
+		let node = removedADs[index];
+		// auxiliaries should not be more than 3 in length
+		if((roots.length) && (index - roots[roots.length-1].index > 4)) break;
+		// add verbal phrases only
+		if(node.node.tags[0].startsWith("V")) roots.push({
+			base:new Inflectors(node.node.tokens[0]).toPresent(),
+			token:node.node.tokens[0].toLowerCase(),
+			index:node.index
+		});
+	}
+
+	// no verbal phrases found
+	if(roots.length === 0) return nodes;
+	
+	// four verbal phrases
+	if((!marked) && roots.length > 3) {
+		// (AUX: will) + (AUX: have) + (AUX:been) + (ROOT)
+		if(roots[0].base === "will" && roots[1].base === "have" && roots[2].token === "been") {
+			markAsRoot(roots[3].index);
+		}
+	}
+
+	// three verbal phrases
+	if((!marked) && roots.length > 2) {
+		// (AUX: HAVE) + (AUX: BEEN) + (ROOT)
+		if(roots[0].base === "have" && roots[1].token === "been") markAsRoot(roots[2].index);
+		// (AUX: WILL) + (AUX: HAVE) + (ROOT)
+		else if(roots[0].base === "will" && roots[1].base === "have") markAsRoot(roots[2].index);
+		// (AUX: BE) + (AUX: going to) + (ROOT)
+		else if(roots[0].base === "be" && roots[1].token === "going" && nodes[roots[1].index+1].tokens[0] === "to") {
+			markAsRoot(roots[2].index);
+		}
+	}
+	
+
+	// two verbal phrase
+	if((!marked) && roots.length > 1) {
+		// (AUX: DO/HAVE/BE) + (ROOT VERB)
+		if(roots[0].base === "do" || roots[0].base === "be" || roots[0].base === "have") {
+			markAsRoot(roots[1].index);
+		}
+	}
+
+	// one verbal phrase found
+	if((!marked) && roots.length > 0) markAsRoot(roots[0].index);
+
 	return nodes;
 }
 
@@ -158,8 +207,8 @@ function matchNodes (left:NodeInterface, right:NodeInterface, iteration:number):
 		else if(rel.label === "NSUBJPASS" && rel.direction === "->" && findBy.label("NSUBJPASS",right.left)) continue;
 
 		// condition : tokens
-		else if(rel.leftTokens.length && rel.leftTokens.indexOf(new Inflectors(deContract(left.tokens[0])).conjugate("VBP")) === -1) continue;
-		else if(rel.rightTokens.length && rel.rightTokens.indexOf(new Inflectors(deContract(right.tokens[0])).conjugate("VBP")) === -1) continue;
+		else if(rel.leftTokens.length && rel.leftTokens.indexOf(new Inflectors(left.tokens[0]).conjugate("VBP")) === -1) continue;
+		else if(rel.rightTokens.length && rel.rightTokens.indexOf(new Inflectors(right.tokens[0]).conjugate("VBP")) === -1) continue;
 
 		else {
 			match = rel;
@@ -189,12 +238,3 @@ export const findBy = {
 		return !!nodes.find((node)=>node.label === label);
 	},
 };
-
-// reverse english contractions back to it's normal form
-const contractions = ["'m",	"'s",	"'d",	"'ll",	"'re",	"'ve"];
-const replacements = ["am",	"is",	"would","will",	"are",	"have"];
-function deContract(token:string):string{
-	let ci = contractions.indexOf(token);
-	if(~ci) return replacements[ci];
-	else return token;
-}
