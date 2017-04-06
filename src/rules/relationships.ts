@@ -277,11 +277,11 @@ export const relationships:RelationshipInterface[] = [
 		label:"AUX"
 	},
 	{
-		left:["VP","VB"],
+		left:["VP","VB","VBN"],
 		right:["VP","VB"],
-		leftTokens:["be","can","do","have","may","will","shall"],
+		leftTokens:["be","can","do","have","may","will","shall","go"],
 		rightTokens:[],
-		maxDistance:1,
+		maxDistance:4,
 		delay:0,
 		direction:"->",
 		label:"AUX"
@@ -291,7 +291,7 @@ export const relationships:RelationshipInterface[] = [
 		right:["VBN"],
 		leftTokens:["be","can","do","have","may","will","shall"],
 		rightTokens:[],
-		maxDistance:1,
+		maxDistance:4,
 		delay:0,
 		direction:"->",
 		label:"AUX"
@@ -301,7 +301,7 @@ export const relationships:RelationshipInterface[] = [
 		right:["VBN"],
 		leftTokens:["be","can","do","have","may","will","shall"],
 		rightTokens:[],
-		maxDistance:1,
+		maxDistance:4,
 		delay:0,
 		direction:"->",
 		label:"AUXPASS"
