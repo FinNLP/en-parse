@@ -1,4 +1,4 @@
-const parser = require("../dist/index.js").tree;
+const parser = require("../../dist/index.js").tree;
 const pos = require("en-pos");
 const chalk = require("chalk");
 

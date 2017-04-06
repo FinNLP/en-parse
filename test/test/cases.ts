@@ -381,9 +381,9 @@ const cases:Case[] = [
 	},
 	{
 		"0": {t: "what",  l: "NSUBJ",  p: 1},
-		"1": {t: "did",  l: "ROOT",  p: -1},
+		"1": {t: "did",  l: "AUX",  p: -1},
 		"2": {t: "you",  l: "NSUBJ",  p: 3},
-		"3": {t: "do",  l: "CCOMP",  p: 1},
+		"3": {t: "do",  l: "ROOT",  p: 1},
 		"4": {t: "?",  l: "PUNCT",  p: 3},
 		"tokens": ["what",  "did",  "you",  "do",  "?"],
 		"tags": ["WP",  "VBD",  "PRP",  "VBP",  "."]
@@ -523,9 +523,9 @@ const cases:Case[] = [
 	{
 		"0": {t: "I",  l: "NSUBJ",  p: 2},
 		"1": {t: "really",  l: "ADVMOD",  p: 2},
-		"2": {t: "have",  l: "ROOT",  p: -1},
+		"2": {t: "have",  l: "AUX",  p: -1},
 		"3": {t: "to",  l: "AUX",  p: 4},
-		"4": {t: "visit",  l: "CCOMP",  p: 2},
+		"4": {t: "visit",  l: "ROOT",  p: 2},
 		"5": {t: "him",  l: "DOBJ",  p: 4},
 		"tokens": ["I",  "really",  "have",  "to",  "visit",  "him"],
 		"tags": ["PRP",  "RB",  "VBP",  "TO",  "VB",  "PRP"]
@@ -658,9 +658,9 @@ const cases:Case[] = [
 	},
 	{
 		"0": {t: "Why",  l: "ADVMOD",  p: 1},
-		"1": {t: "are",  l: "ROOT",  p: -1},
+		"1": {t: "are",  l: "AUX",  p: -1},
 		"2": {t: "you",  l: "NSUBJ",  p: 3},
-		"3": {t: "asking",  l: "XCOMP",  p: 1},
+		"3": {t: "asking",  l: "ROOT",  p: 1},
 		"tokens": ["Why",  "are",  "you",  "asking"],
 		"tags": ["WRB",  "VBP",  "PRP",  "VBG"]
 	},
@@ -804,9 +804,9 @@ const cases:Case[] = [
 	},
 	{
 		"0": {t: "Why",  l: "ADVMOD",  p: 1},
-		"1": {t: "do",  l: "ROOT",  p: -1},
+		"1": {t: "do",  l: "AUX",  p: -1},
 		"2": {t: "I",  l: "NSUBJ",  p: 3},
-		"3": {t: "raise",  l: "CCOMP",  p: 1},
+		"3": {t: "raise",  l: "ROOT",  p: 1},
 		"4": {t: "the",  l: "MWE",  p: 5},
 		"5": {t: "matter",  l: "DOBJ",  p: 3},
 		"tokens": ["Why",  "do",  "I",  "raise",  "the",  "matter"],
