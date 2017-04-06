@@ -51,7 +51,7 @@ export function toArray(jsonTree:NodeInterface,parent?:number,arr?:ResultNode[])
 		var thisLabel = jsonTree.label;
 		var thisParent = parent;
 		if(pos !== jsonTree.index[1]) {
-			thisLabel = "MWE";
+			thisLabel = "EXT";
 			thisParent = jsonTree.index[1];
 		}
 		arr[pos] = {

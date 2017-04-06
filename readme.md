@@ -112,6 +112,7 @@ Annotation | Name | Example
 **`PUNCT`** | Punctuation | Guys`,` keep calm`!`
 **`CC`** | Coordinating Conjunction | Mathew `and` Alex
 **`INTERJ`** | Interjection | Pass me the sugar, `please`
+**`EXT`** | Extension | My name is `Alex` Corvi
 **`DEP`** | Unrecognized dependency | how `what`
 
 ## Why?
