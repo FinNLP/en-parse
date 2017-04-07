@@ -695,7 +695,7 @@ const cases:Case[] = [
 				"parent": 2
 			},
 			{
-				"label": "EXT",
+				"label": "AUX",
 				"type": "VP",
 				"parent": 2
 			},
