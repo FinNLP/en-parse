@@ -17,7 +17,6 @@ export const preUnique:Array<NonUniqueInterface> = [
 	["NP",				['DT', 'PRP$', 'JJ', 'JJS', "JJR", '$', '$', 'NNP', 'NNPS']],
 	["NP",				['PDT', 'PRP$', 'JJ', 'JJS', "JJR", '$', '$', 'NN', 'NNS']],
 	["NP",				['PDT', 'PRP$', 'JJ', 'JJS', "JJR", '$', '$', 'NNP', 'NNPS']],
-	["VP",				['VBZ', 'VBG']],
 	["NP",				['NNP', 'NNPS']],
 	["ADV",				['RB', 'RB']],
 	["ADJP",			['RB', 'JJ'],	(L:NodeInterface,R:NodeInterface,i:number,n:Array<NodeInterface>)=>R.tags.length===1],
