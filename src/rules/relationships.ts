@@ -20,7 +20,7 @@ export const relationships:RelationshipInterface[] = [
 	 *    		4. NSUBJPASS 	Nominal Subject (Passive)
 	**/
 	{
-		left:["NP","WDT","WP"],
+		left:["NP","WDT","WP","WP$"],
 		right:["VP","VB"],
 		leftTokens:[],
 		rightTokens:[],
@@ -429,12 +429,12 @@ export const relationships:RelationshipInterface[] = [
 		label:"AMOD"
 	},
 	{
-		left:["WDT","WP"],
+		left:["WDT","WP","WP$"],
 		right:["NP"],
 		leftTokens:[],
 		rightTokens:[],
 		maxDistance:-1,
-		delay:0,
+		delay:-1,
 		direction:"<-",
 		label:"DET"
 	},
