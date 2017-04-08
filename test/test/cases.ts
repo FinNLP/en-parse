@@ -1821,7 +1821,7 @@ const cases:Case[] = [
 				"parent": 1
 			},
 			{
-				"label": "DEP",
+				"label": "AMOD",
 				"type": "ADJP",
 				"parent": 4
 			},
