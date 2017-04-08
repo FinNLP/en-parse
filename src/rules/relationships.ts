@@ -50,7 +50,7 @@ export const relationships:RelationshipInterface[] = [
 		label:"DOBJ"
 	},
 	{
-		left:["WDT","WP"],
+		left:["WDT","WP","WP$"],
 		right:["VP","VB","VBN"],
 		leftTokens:[],
 		rightTokens:[],
@@ -429,12 +429,12 @@ export const relationships:RelationshipInterface[] = [
 		label:"AMOD"
 	},
 	{
-		left:["WDT","WP","WP$"],
+		left:["WDT","WP"],
 		right:["NP"],
 		leftTokens:[],
 		rightTokens:[],
 		maxDistance:-1,
-		delay:-1,
+		delay:0,
 		direction:"<-",
 		label:"DET"
 	},
