@@ -21,35 +21,6 @@ export default function(nodes:NodeInterface[],recursionLimit:number){
 	return nodes;
 };
 
-// I did the homework when I was told to
-
-/**
- * Root identifier:
-
-
-
-	- Possible findings
-		
-		// 4 verbs
-		- BE + GOING + TO + (ROOT VERB)
-		- WILL + HAVE + been + (ROOT VERB)
-		
-		// 3 verbs
-		- HAVE + been + (ROOT VERB)
-		- WILL + HAVE + (ROOT VERB)
-		
-		// 2 indicator
-		- DO + (ROOT VERB)
-		- IS + (ROOT VERB)
-		- HAVE + (ROOT VERB)
-		- GOING (TO) + (ROOT VERB)
-
-		// 1 verbs
-		- (ROOT VERB)
-
- * 
-**/
-
 
 function identifyRoot(nodes:Array<NodeInterface>){
 	let marked = false;
