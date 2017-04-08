@@ -2745,7 +2745,7 @@ const cases:Case[] = [
 		"tokens": ["whose","book","is","this","?"],
 		"expectedResult": [
 			{
-				"label": "DEP",
+				"label": "DOBJ",
 				"type": "WP$",
 				"parent": 2
 			},
