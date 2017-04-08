@@ -429,6 +429,16 @@ export const relationships:RelationshipInterface[] = [
 		label:"AMOD"
 	},
 	{
+		left:["ADJ","ADJP"],
+		right:["VP","VB","VBN"],
+		leftTokens:[],
+		rightTokens:[],
+		maxDistance:-1,
+		delay:4,
+		direction:"->",
+		label:"AMOD"
+	},
+	{
 		left:["WDT","WP"],
 		right:["NP"],
 		leftTokens:[],
