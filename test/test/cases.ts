@@ -179,37 +179,6 @@ const cases:Case[] = [
 		]
 	},
 	{
-		"tags": ["WP","PRP","VBD","NNS","NN"],
-		"tokens": ["what","she","said","has","sense"],
-		"expectedResult": [
-			{
-				"label": "DOBJ",
-				"type": "WP",
-				"parent": 2
-			},
-			{
-				"label": "NSUBJ",
-				"type": "NP",
-				"parent": 2
-			},
-			{
-				"label": "ROOT",
-				"type": "VP",
-				"parent": -1
-			},
-			{
-				"label": "DOBJ",
-				"type": "NP",
-				"parent": 2
-			},
-			{
-				"label": "IOBJ",
-				"type": "NP",
-				"parent": 2
-			}
-		]
-	},
-	{
 		"tags": ["WP","PRP","VBD","VBZ","JJ"],
 		"tokens": ["what","they","said","is","interesting"],
 		"expectedResult": [
@@ -832,42 +801,6 @@ const cases:Case[] = [
 				"label": "ADVMOD",
 				"type": "PP",
 				"parent": 3
-			}
-		]
-	},
-	{
-		"tags": ["DT","PRP","VBP","TO","VB","IN"],
-		"tokens": ["that","I","need","to","drag","around"],
-		"expectedResult": [
-			{
-				"label": "NMOD",
-				"type": "NP",
-				"parent": 2
-			},
-			{
-				"label": "NSUBJ",
-				"type": "NP",
-				"parent": 2
-			},
-			{
-				"label": "ROOT",
-				"type": "VP",
-				"parent": -1
-			},
-			{
-				"label": "AUX",
-				"type": "TO",
-				"parent": 4
-			},
-			{
-				"label": "CCOMP",
-				"type": "VB",
-				"parent": 2
-			},
-			{
-				"label": "ADVMOD",
-				"type": "PP",
-				"parent": 4
 			}
 		]
 	},
@@ -1760,32 +1693,6 @@ const cases:Case[] = [
 		]
 	},
 	{
-		"tags": ["NNP","NNS","VBP","JJ"],
-		"tokens": ["XML","tags","are","case-sensitive"],
-		"expectedResult": [
-			{
-				"label": "NMOD",
-				"type": "NP",
-				"parent": 2
-			},
-			{
-				"label": "NSUBJ",
-				"type": "NP",
-				"parent": 2
-			},
-			{
-				"label": "ROOT",
-				"type": "VP",
-				"parent": -1
-			},
-			{
-				"label": "AMOD",
-				"type": "ADJ",
-				"parent": 2
-			}
-		]
-	},
-	{
 		"tags": ["PRP","VBD","DT","JJ","NN"],
 		"tokens": ["I","opened","the","white","door"],
 		"expectedResult": [
@@ -2375,68 +2282,6 @@ const cases:Case[] = [
 		]
 	},
 	{
-		"tags": ["NNP","NN","IN","NNP","NN"],
-		"tokens": ["Custom","grouping","in","PivotTable","view"],
-		"expectedResult": [
-			{
-				"label": "DEP",
-				"type": "NP",
-				"parent": 3
-			},
-			{
-				"label": "DEP",
-				"type": "NP",
-				"parent": 3
-			},
-			{
-				"label": "CASE",
-				"type": "PP",
-				"parent": 3
-			},
-			{
-				"label": "ROOT",
-				"type": "NP",
-				"parent": -1
-			},
-			{
-				"label": "DEP",
-				"type": "NP",
-				"parent": 3
-			}
-		]
-	},
-	{
-		"tags": ["NNP","NN","IN","NN","NNS"],
-		"tokens": ["PivotTable","view","with","custom","groups"],
-		"expectedResult": [
-			{
-				"label": "DEP",
-				"type": "NP",
-				"parent": 4
-			},
-			{
-				"label": "DEP",
-				"type": "NP",
-				"parent": 4
-			},
-			{
-				"label": "CASE",
-				"type": "PP",
-				"parent": 4
-			},
-			{
-				"label": "EXT",
-				"type": "NP",
-				"parent": 4
-			},
-			{
-				"label": "ROOT",
-				"type": "NP",
-				"parent": -1
-			}
-		]
-	},
-	{
 		"tags": ["CC","VBG","NNP","VBD","RB","VBG"],
 		"tokens": ["But","following","Stillman","was","not","wandering"],
 		"expectedResult": [
@@ -2567,42 +2412,6 @@ const cases:Case[] = [
 				"label": "OBL",
 				"type": "NP",
 				"parent": 2
-			}
-		]
-	},
-	{
-		"tags": ["DT","POS","RB","JJ","PRP","VBP"],
-		"tokens": ["That","'s","very","generous","I","say"],
-		"expectedResult": [
-			{
-				"label": "DEP",
-				"type": "NP",
-				"parent": 5
-			},
-			{
-				"label": "DEP",
-				"type": "POS",
-				"parent": 5
-			},
-			{
-				"label": "EXT",
-				"type": "ADJP",
-				"parent": 3
-			},
-			{
-				"label": "DEP",
-				"type": "ADJP",
-				"parent": 5
-			},
-			{
-				"label": "NSUBJ",
-				"type": "NP",
-				"parent": 5
-			},
-			{
-				"label": "ROOT",
-				"type": "VP",
-				"parent": -1
 			}
 		]
 	},
@@ -2865,37 +2674,6 @@ const cases:Case[] = [
 		]
 	},
 	{
-		"tags": ["WP","IN","PRP$","NN","NN"],
-		"tokens": ["What","about","my","assistant","cook"],
-		"expectedResult": [
-			{
-				"label": "DET",
-				"type": "WP",
-				"parent": 4
-			},
-			{
-				"label": "CASE",
-				"type": "PP",
-				"parent": 4
-			},
-			{
-				"label": "EXT",
-				"type": "NP",
-				"parent": 4
-			},
-			{
-				"label": "EXT",
-				"type": "NP",
-				"parent": 4
-			},
-			{
-				"label": "ROOT",
-				"type": "NP",
-				"parent": -1
-			}
-		]
-	},
-	{
 		"tags": ["PRP","VBD","DT","JJ","JJ","NN"],
 		"tokens": ["It","was","a","brilliant","sunny","day"],
 		"expectedResult": [
@@ -2959,32 +2737,6 @@ const cases:Case[] = [
 				"label": "OBL",
 				"type": "NP",
 				"parent": 1
-			}
-		]
-	},
-	{
-		"tags": ["WDT","NN","PRP","VBP"],
-		"tokens": ["which","book","you","prefer"],
-		"expectedResult": [
-			{
-				"label": "DET",
-				"type": "WDT",
-				"parent": 1
-			},
-			{
-				"label": "NMOD",
-				"type": "NP",
-				"parent": 3
-			},
-			{
-				"label": "NSUBJ",
-				"type": "NP",
-				"parent": 3
-			},
-			{
-				"label": "ROOT",
-				"type": "VP",
-				"parent": -1
 			}
 		]
 	},
@@ -3439,42 +3191,6 @@ const cases:Case[] = [
 				"label": "IOBJ",
 				"type": "NP",
 				"parent": 1
-			}
-		]
-	},
-	{
-		"tags": ["NNP","NNS","VBD","RB","CD","SYM"],
-		"tokens": ["October","sales","inched","down","0.4","%"],
-		"expectedResult": [
-			{
-				"label": "NMOD",
-				"type": "NP",
-				"parent": 2
-			},
-			{
-				"label": "NSUBJ",
-				"type": "NP",
-				"parent": 2
-			},
-			{
-				"label": "ROOT",
-				"type": "VP",
-				"parent": -1
-			},
-			{
-				"label": "ADVMOD",
-				"type": "ADV",
-				"parent": 5
-			},
-			{
-				"label": "NUMMOD",
-				"type": "CD",
-				"parent": 5
-			},
-			{
-				"label": "DOBJ",
-				"type": "NP",
-				"parent": 2
 			}
 		]
 	}

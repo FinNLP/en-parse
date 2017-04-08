@@ -21,10 +21,12 @@ module.exports = function(tokens,index,deep){
 function recursiveConsole(node,i,tokens) {
 	var pads = chalk.green("	 | ".repeat(i));
 	var type = chalk.yellow("Tag/Type: ") + node.tags + "/" + node.type;
-	var vtokens = chalk.red("@ Node: ",getTokens(node.index,tokens));
+	var indexes = chalk.yellow("Indexes: ") + node.index.join(":");
+	var vtokens = chalk.red("	@ Node: ",getTokens(node.index,tokens));
 	var label = chalk.yellow("Label: ") + node.label;
 	console.log(pads,vtokens);
 	console.log(pads,"	",type);
+	console.log(pads,"	",indexes);
 	console.log(pads,"	",label);
 	if(node.left.length) console.log(pads,"	",chalk.green("# LEFT NODES"));
 	node.left.forEach((node)=>recursiveConsole(node,i+1,tokens));
