@@ -435,7 +435,7 @@ export const relationships:RelationshipInterface[] = [
 		rightTokens:[],
 		maxDistance:-1,
 		delay:0,
-		direction:"->",
+		direction:"<-",
 		label:"DET"
 	},
 	{
