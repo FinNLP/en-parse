@@ -1,74 +1,85 @@
-import {NodeInterface} from "../index";
+export const single:{[key:string]:string} = {
+	".":	"PUNCT",
+	",":	"PUNCT",
+	":":	"PUNCT",
+	'"':	"PUNCT",
+	")":	"PUNCT",
+	"(":	"PUNCT",
+	"#":	"PUNCT",
 
-export interface NonUniqueInterface {
-	0:string,
-	1:Array<string>,
-	2?:Function
-}
+	"PRP":	"NP",
+	"PRP$":	"NP",
+	"NNP":	"NP",
+	"NNPS":	"NP",
+	"NN":	"NP",
+	"NNS":	"NP",
+	"$":	"NP",
+	"SYM":	"NP",
+	"FW":	"NP",
 
-export interface UniqueInterface {
-	0:string,
-	1:string
-}
+	"PDT":	"DT",
 
-export const preUnique:Array<NonUniqueInterface> = [
-	//Chunk label		Left Type[0] - Right Tags[1234..]
-	["NP",				['DT', 'PRP$', 'JJ', 'JJS', "JJR", '$', '$', 'NN', 'NNS']],
-	["NP",				['DT', 'PRP$', 'JJ', 'JJS', "JJR", '$', '$', 'NNP', 'NNPS']],
-	["NP",				['PDT', 'PRP$', 'JJ', 'JJS', "JJR", '$', '$', 'NN', 'NNS']],
-	["NP",				['PDT', 'PRP$', 'JJ', 'JJS', "JJR", '$', '$', 'NNP', 'NNPS']],
-	["NP",				['NNP', 'NNPS']],
-	["ADV",				['RB', 'RB']],
-	["ADJP",			['RB', 'JJ'],	(L:NodeInterface,R:NodeInterface,i:number,n:Array<NodeInterface>)=>R.tags.length===1],
-	["UH",				["DT",","],		(L:NodeInterface,R:NodeInterface,i:number,n:Array<NodeInterface>)=>L.index[0]===0&&R.index[1]===1],
-	["PP",				["DT","IN"]], 	// might need a condition
-	["UH",				["PDT",","],	(L:NodeInterface,R:NodeInterface,i:number,n:Array<NodeInterface>)=>L.index[0]===0&&R.index[1]===1],
-	["PP",				["PDT","IN"]], 	// might need a condition
-	["UH",				["UH",","]],
-	["NP",				["NP","POS","NN"]],
-	["PP",				["PP","IN"]],
-	["PP",				["IN","IN"]],
-	["CD",				["CD","CC","CD"]],
-];
+	"VBZ":	"VP",
+	"VBP":	"VP",
+	"VBD":	"VP",
+	"VBG":	"VP",
 
-export const unique:Array<UniqueInterface> = [
-	//To				From
-	["PUNCT",			'.'],
-	["PUNCT",			','],
-	["PUNCT",			':'],
-	["PUNCT",			'"'],
-	["PUNCT",			')'],
-	["PUNCT",			'('],
-	["PUNCT",			'#'],
-	["PP",				'IN'],
-	["PRT",				'RP'],
-	["CD",				'LS'], // <- Questionable
-	["NP",				'PRP'],
-	["NP",				'PRP$'],
-	["NP",				'NNP'],
-	["NP",				'NNPS'],
-	["NP",				'NN'],
-	["NP",				'DT'],
-	["NP",				'PDT'],
-	["ADJ",				'JJ'],
-	["ADJ",				'JJR'],
-	["ADJ",				'JJS'],
-	["NP",				'NNS'],
-	["VP",				'VBZ'],
-	["VP",				'VBP'],
-	["VP",				'VBD'],
-	["VP",				'VBG'],
-	["ADV",				'WRB'],
-	["ADV",				'RB'],
-	["ADV",				'RBR'],
-	["ADV",				'RBS'],
-	["NP",				"$"],
-	["NP",				"SYM"],
-	["NP",				"FW"],
-];
+	"JJ":	"ADJ",
+	"JJR":	"ADJ",
+	"JJS":	"ADJ",
 
-export const postUnique:Array<NonUniqueInterface> = [
-	//Chunk label		Left Type[0] - Right Tags[1234..]
-	["SP",				['PP', 'NP']],
-	["NP",				["NP","NNP"]]
+	"WRB":	"ADV",
+	"RB":	"ADV",
+	"RBR":	"ADV",
+	"RBS":	"ADV",
+
+	"IN":	"PP",
+	
+	"RP":	"PRT",
+	
+	"LS":	"CD"
+};
+
+export interface MultipleRule {
+	type:string;
+	regex:RegExp;
+};
+
+export const multiple:MultipleRule[] = [
+	{
+		type:"NP",
+		regex:/((#DT-|#ADJ-)+|(#ADJ-|#NP-)+)#NP-/g,
+	},
+	{
+		type:"ADV",
+		regex:/((#ADV-){2,})/g,
+	},
+	{
+		type:"ADJ",
+		regex:/((#ADJ-){2,})/g,
+	},
+	{
+		type:"ADJP",
+		regex:/#ADV-#ADJ-/,
+	},
+	{
+		type:"PP",
+		regex:/#PP-#PP-/
+	},
+	{
+		type:"UH",
+		regex:/($(#DT|#UH|#PDT)-(#PUNCT)-)/g,
+	},
+	{
+		type:"PP",
+		regex:/((#DT|#PDT|#PP|#IN)-(#IN)-)/g,
+	},
+	{
+		type:"NP",
+		regex:/#DT-/g,
+	},
+	{
+		type:"NP",
+		regex:/#NP-#POS-#NP-/,
+	},
 ];
