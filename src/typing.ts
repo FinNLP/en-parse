@@ -28,7 +28,6 @@ function multipleTyping(nodes:NodeInterface[]):NodeInterface[]{
 			let mostLeftIndex = getMostLeftIndex(nodesTypes,startingIndex);
 			let mostRightIndex = getMostRightIndex(mostLeftIndex,match);
 			let count = mostRightIndex - mostLeftIndex + 1;
-			console.log(match,mostLeftIndex,mostRightIndex);
 			nodes[mostLeftIndex].type = rule.type;
 			const dyingNodes:{index:number,node:NodeInterface}[] = [];
 			for (let index = 0; index < nodes.length; index++) {
