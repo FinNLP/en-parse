@@ -19,7 +19,6 @@ function singleTyping (nodes:NodeInterface[]):NodeInterface[]{
 
 function multipleTyping(nodes:NodeInterface[]):NodeInterface[]{
 	let nodesTypes = nodes.map(x=>"#"+x.type).join("-") + "-";
-	console.log(nodesTypes);
 	for (var index = 0; index < multiple.length; index++) {
 		var rule = multiple[index];
 		let result:RegExpExecArray|null;
